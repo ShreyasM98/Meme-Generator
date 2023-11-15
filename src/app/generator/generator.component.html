@@ -1,0 +1,83 @@
+<!--.form-group class is used to group form elements and their labels to provide spacing and proper alignment.-->
+<!--For example, with accept="image/*", the file input will allow the user to select files with MIME types like image/jpeg, image/png, image/gif, etc.-->
+<!--npm i ngx-color and add ColorChromeModule from 'ngx-color/chrome' -->
+<!--The HTML <canvas> element is used to draw graphics via JavaScript-->
+<div class="app">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card drop-shadow">
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="">Select an Image</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  accept="image/*"
+                  (change)="preview($event)"
+                />
+              </div>
+              <div class="form-group">
+                <label for="">Top Text</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="topText"
+                  [(ngModel)]="topText"
+                  (keyup)="drawText()"
+                />
+              </div>
+              <div class="form-group">
+                <label for="">Bottom Text</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="bottomText"
+                  [(ngModel)]="bottomText"
+                  (keyup)="drawText()"
+                />
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="">Text Color</label>
+                    <color-chrome
+                      (onChangeComplete)="canvasTextColor($event)"
+                    ></color-chrome>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="">Background Color</label>
+                    <color-chrome
+                      (onChangeComplete)="canvasBgColor($event)"
+                    ></color-chrome>
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary w-100 mt-5"
+                  (click)="downloadImg()"
+                >
+                  Download
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <canvas
+          class="drop-shadow"
+          #memeCanvas
+          width="700"
+          height="800"
+          style="background-color: #f9f9fd"
+        ></canvas>
+      </div>
+    </div>
+  </div>
+</div>
